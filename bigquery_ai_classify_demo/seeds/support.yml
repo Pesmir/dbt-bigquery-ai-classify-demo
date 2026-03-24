@@ -1,0 +1,29 @@
+version: 2
+
+seeds:
+  - name: seed_support__ticket_categories
+    description: >
+      Seeded category catalog used as the controlled label set for the
+      BigQuery AI.CLASSIFY demo.
+    columns:
+      - name: category_id
+        description: Unique identifier for the ticket category.
+
+      - name: category_name
+        description: Human-readable category label returned by AI.CLASSIFY.
+
+      - name: category_description
+        description: Plain-language description that helps the model
+          distinguish each category.
+
+  - name: seed_support__customer_success_tickets
+    description: >
+      Seeded customer success tickets that act as the sample input dataset
+      for the classification demo.
+    columns:
+      - name: ticket_id
+        description: Unique identifier for the generated support ticket.
+
+      - name: ticket_description
+        description: Free-text description of the issue or request that
+          needs to be classified.

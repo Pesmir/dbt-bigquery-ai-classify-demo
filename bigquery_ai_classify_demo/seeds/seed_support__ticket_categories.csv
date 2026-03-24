@@ -1,0 +1,6 @@
+category_id,category_name,category_description
+1,Billing and Invoicing,Questions about invoices payments refunds plan changes or billing errors.
+2,Technical Troubleshooting,Requests where the product is not working as expected and needs technical investigation.
+3,Feature Request,Ideas for new product capabilities workflow improvements or enhancements.
+4,Account Access and Permissions,Issues related to login access roles user invites or permission changes.
+5,Needs Triage,Tickets that do not clearly fit another category and should be reviewed manually.

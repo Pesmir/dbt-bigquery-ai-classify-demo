@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: mart_ticket_classifications
+    description: >
+      One row per ticket showing the predicted category returned by
+      BigQuery AI.CLASSIFY and the matching seeded category metadata. This
+      is the final demo output for routing customer success tickets.
+    columns:
+      - name: ticket_id
+        description: Unique identifier for the support ticket.
+
+      - name: ticket_description
+        description: Free-text ticket content that was classified.
+
+      - name: predicted_category_name
+        description: Category label returned by BigQuery AI.CLASSIFY.
+
+      - name: category_id
+        description: Identifier for the matched seeded category.
+
+      - name: category_name
+        description: Human-readable category label from the seed table.
+
+      - name: category_description
+        description: Description of the matched category used in the
+          classifier prompt.

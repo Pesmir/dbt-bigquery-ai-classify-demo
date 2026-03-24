@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: stg_support__ticket_categories
+    description: >
+      Staging view for the seeded ticket categories. This model performs
+      the explicit casting required by the staging layer and preserves the
+      category metadata used by the AI classification step.
+    columns:
+      - name: category_id
+        description: Unique identifier for the ticket category.
+
+      - name: category_name
+        description: Human-readable category label.
+
+      - name: category_description
+        description: Description that explains when a ticket belongs to
+          the category.

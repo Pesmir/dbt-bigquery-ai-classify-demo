@@ -1,0 +1,25 @@
+name: "bigquery_ai_classify_demo"
+version: "1.0.0"
+profile: "bigquery_ai_classify_demo"
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  bigquery_ai_classify_demo:
+    staging:
+      +materialized: view
+    datamart:
+      +materialized: table
+
+seeds:
+  bigquery_ai_classify_demo:
+    +quote_columns: false

@@ -1,0 +1,13 @@
+version: 2
+
+models:
+  - name: stg_support__customer_success_tickets
+    description: >
+      Staging view for the seeded customer success tickets. The model keeps
+      the raw ticket grain and performs explicit type casting only.
+    columns:
+      - name: ticket_id
+        description: Unique identifier for the support ticket.
+
+      - name: ticket_description
+        description: Free-text ticket content sent to AI.CLASSIFY.

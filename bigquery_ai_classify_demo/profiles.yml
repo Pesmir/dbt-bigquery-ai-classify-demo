@@ -1,0 +1,11 @@
+bigquery_ai_classify_demo:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: "{{ env_var('DBT_BIGQUERY_METHOD', 'oauth') }}"
+      project: "{{ env_var('DBT_BIGQUERY_PROJECT') }}"
+      dataset: "{{ env_var('DBT_BIGQUERY_DATASET', 'bigquery_ai_classify_demo') }}"
+      location: "{{ env_var('DBT_BIGQUERY_LOCATION', 'EU') }}"
+      priority: interactive
+      threads: "{{ env_var('DBT_THREADS', '4') | int }}"

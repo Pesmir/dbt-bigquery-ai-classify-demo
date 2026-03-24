@@ -1,0 +1,11 @@
+ticket_id,ticket_description
+1001,Our latest invoice looks too high because two seats were billed twice after we upgraded the plan.
+1002,The dashboard times out every time I apply a date filter for the last 90 days.
+1003,It would be helpful if we could schedule a weekly export of account health metrics to email.
+1004,One of our new teammates cannot log in and the invite link says it has expired.
+1005,Can you change our contract to annual billing and let me know how the discount would work.
+1006,The Salesforce sync stopped working yesterday and no new records have been pushed since then.
+1007,We need a way to bulk update ownership across all open onboarding tasks.
+1008,Please remove admin rights from two users and give read only access to our external agency.
+1009,The mobile app crashes immediately after I open the customer timeline view.
+1010,Not sure who should handle this but our team wants advice on best practices for setting up quarterly business reviews.
