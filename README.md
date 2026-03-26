@@ -12,22 +12,10 @@ Inside the project you will find:
 - two staging models with explicit casting
 - one final mart model that calls `AI.CLASSIFY`
 
-Quick start:
+An example environment file is available at
+[`bigquery_ai_classify_demo/.env.example`](./bigquery_ai_classify_demo/.env.example).
+At minimum, set `DBT_BIGQUERY_PROJECT`. The other documented dbt profile
+variables are optional because the project defines defaults for them.
 
-```bash
-uv sync
-source .venv/bin/activate
-cd bigquery_ai_classify_demo
-cp .env.example .env
-set -a
-source .env
-set +a
-export DBT_PROFILES_DIR=$PWD
-dbt debug
-dbt seed
-dbt build -s +mart_ticket_classifications
-dbt show -s mart_ticket_classifications --limit 10
-```
-
-Setup and run instructions are documented in
+More project details are documented in
 [`bigquery_ai_classify_demo/README.md`](./bigquery_ai_classify_demo/README.md).
