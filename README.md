@@ -15,12 +15,18 @@ Inside the project you will find:
 Quick start:
 
 ```bash
+uv sync
+source .venv/bin/activate
 cd bigquery_ai_classify_demo
 cp .env.example .env
-./dbtw debug
-./dbtw seed
-./dbtw build -s +mart_ticket_classifications
-./dbtw show -s mart_ticket_classifications --limit 10
+set -a
+source .env
+set +a
+export DBT_PROFILES_DIR=$PWD
+dbt debug
+dbt seed
+dbt build -s +mart_ticket_classifications
+dbt show -s mart_ticket_classifications --limit 10
 ```
 
 Setup and run instructions are documented in
