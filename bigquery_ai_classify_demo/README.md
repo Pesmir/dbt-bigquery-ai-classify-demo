@@ -25,98 +25,21 @@ models/
   datamart/support/
 ```
 
-## Required environment variables
+## Environment variables
 
-The project uses a repo-local `profiles.yml` backed by `.env`.
+The project uses a repo-local `profiles.yml` backed by `.env`. An example file
+is available at [`.env.example`](./.env.example).
 
-Required:
+You must set:
 
 - `DBT_BIGQUERY_PROJECT`
+
+The profile also reads these variables, but it defines defaults for them:
+
+- `DBT_BIGQUERY_METHOD`
 - `DBT_BIGQUERY_DATASET`
 - `DBT_BIGQUERY_LOCATION`
-
-Optional:
-
-- `BIGQUERY_AI_CONNECTION_ID`
-- `BIGQUERY_AI_ENDPOINT`
-
-If `BIGQUERY_AI_CONNECTION_ID` is not set, `AI.CLASSIFY` uses BigQuery
-end-user credentials as documented by Google Cloud.
-
-## Install dbt
-
-```bash
-cd ..
-uv sync
-cd bigquery_ai_classify_demo
-source ../.venv/bin/activate
-```
-
-This repo manages dbt through the project virtualenv at `../.venv`, so the
-normal `dbt` command is available after activation.
-
-## One-time shell setup
-
-```bash
-cp .env.example .env
-set -a
-source .env
-set +a
-export DBT_PROFILES_DIR=$PWD
-```
-
-Run the setup from the `bigquery_ai_classify_demo/` directory after activating
-the repo virtualenv. It loads the values from `.env` into your current shell
-and points dbt at the repo-local `profiles.yml`.
-
-Re-run the virtualenv activation and shell setup whenever you open a new shell
-session.
-
-## Validate the setup
-
-```bash
-dbt debug
-```
-
-## Run the demo
-
-```bash
-dbt seed
-dbt build -s +mart_ticket_classifications
-```
-
-## Exact demo flow
-
-Run the project from the `bigquery_ai_classify_demo/` directory:
-
-```bash
-cd ..
-uv sync
-cd bigquery_ai_classify_demo
-source ../.venv/bin/activate
-cp .env.example .env
-set -a
-source .env
-set +a
-export DBT_PROFILES_DIR=$PWD
-dbt debug
-dbt seed
-dbt build -s +mart_ticket_classifications
-```
-
-Inspect the final model:
-
-```bash
-dbt show --inline "select * from {{ ref('mart_ticket_classifications') }}" --limit 10
-```
-
-This flow keeps the demo minimal:
-
-- `dbt debug` validates the local profile and BigQuery connection
-- `dbt seed` creates the two input tables
-- `dbt build -s +mart_ticket_classifications` builds the upstream staging
-  models and the final classification model in one command
-- `dbt show --inline` previews the built result table
+- `DBT_THREADS`
 
 ## Results
 
