@@ -1,6 +1,3 @@
-{% set ai_connection_id = env_var('BIGQUERY_AI_CONNECTION_ID', '') %}
-{% set ai_endpoint = env_var('BIGQUERY_AI_ENDPOINT', '') %}
-{% set classify_optional_arguments = [] %}
 {% set classification_categories = [
     ('Billing and Invoicing', 'Questions about invoices payments refunds plan changes or billing errors.'),
     ('Technical Troubleshooting', 'Requests where the product is not working as expected and needs technical investigation.'),
@@ -9,13 +6,6 @@
     ('Needs Triage', 'Tickets that do not clearly fit another category and should be reviewed manually.')
 ] %}
 
-{% if ai_connection_id %}
-    {% do classify_optional_arguments.append("connection_id => '" ~ ai_connection_id ~ "'") %}
-{% endif %}
-
-{% if ai_endpoint %}
-    {% do classify_optional_arguments.append("endpoint => '" ~ ai_endpoint ~ "'") %}
-{% endif %}
 
 with ticket_categories as (
 
@@ -51,9 +41,6 @@ classified_tickets as (
                 ){% if not loop.last %},{% endif %}
                 {% endfor %}
             ]
-            {% for argument in classify_optional_arguments %}
-            , {{ argument }}
-            {% endfor %}
         ) as predicted_category_name
     from customer_success_tickets
 
