@@ -43,18 +43,46 @@ Optional:
 If `BIGQUERY_AI_CONNECTION_ID` is not set, `AI.CLASSIFY` uses BigQuery
 end-user credentials as documented by Google Cloud.
 
-## Setup
+## Install dbt
+
+```bash
+cd ..
+uv sync
+cd bigquery_ai_classify_demo
+source ../.venv/bin/activate
+```
+
+This repo manages dbt through the project virtualenv at `../.venv`, so the
+normal `dbt` command is available after activation.
+
+## One-time shell setup
 
 ```bash
 cp .env.example .env
-./dbtw debug
+set -a
+source .env
+set +a
+export DBT_PROFILES_DIR=$PWD
+```
+
+Run the setup from the `bigquery_ai_classify_demo/` directory after activating
+the repo virtualenv. It loads the values from `.env` into your current shell
+and points dbt at the repo-local `profiles.yml`.
+
+Re-run the virtualenv activation and shell setup whenever you open a new shell
+session.
+
+## Validate the setup
+
+```bash
+dbt debug
 ```
 
 ## Run the demo
 
 ```bash
-./dbtw seed
-./dbtw build -s +mart_ticket_classifications
+dbt seed
+dbt build -s +mart_ticket_classifications
 ```
 
 ## Exact demo flow
@@ -62,34 +90,42 @@ cp .env.example .env
 Run the project from the `bigquery_ai_classify_demo/` directory:
 
 ```bash
+cd ..
+uv sync
+cd bigquery_ai_classify_demo
+source ../.venv/bin/activate
 cp .env.example .env
-./dbtw debug
-./dbtw seed
-./dbtw build -s +mart_ticket_classifications
+set -a
+source .env
+set +a
+export DBT_PROFILES_DIR=$PWD
+dbt debug
+dbt seed
+dbt build -s +mart_ticket_classifications
 ```
 
 Inspect the final model:
 
 ```bash
-./dbtw show --inline "select * from {{ ref('mart_ticket_classifications') }}" --limit 10
+dbt show --inline "select * from {{ ref('mart_ticket_classifications') }}" --limit 10
 ```
 
 This flow keeps the demo minimal:
 
-- `dbtw debug` validates the local profile and BigQuery connection
-- `dbtw seed` creates the two input tables
-- `dbtw build -s +mart_ticket_classifications` builds the upstream staging
+- `dbt debug` validates the local profile and BigQuery connection
+- `dbt seed` creates the two input tables
+- `dbt build -s +mart_ticket_classifications` builds the upstream staging
   models and the final classification model in one command
-- `dbtw show --inline` previews the built result table
+- `dbt show --inline` previews the built result table
 
 ## Results
 
 The examples below come from these `dbt show` commands:
 
 ```bash
-./dbtw show -s seed_support__ticket_categories --limit 5 --output json
-./dbtw show -s seed_support__customer_success_tickets --limit 10 --output json
-./dbtw show --inline "select * from {{ ref('mart_ticket_classifications') }}" --limit 10 --output json
+dbt show -s seed_support__ticket_categories --limit 5 --output json
+dbt show -s seed_support__customer_success_tickets --limit 10 --output json
+dbt show --inline "select * from {{ ref('mart_ticket_classifications') }}" --limit 10 --output json
 ```
 
 ### Data flow
